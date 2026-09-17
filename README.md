@@ -66,6 +66,16 @@ GENERATION_MODEL=gemini-3.5-flash-lite
 EMBEDDING_MODEL=gemini-embedding-001
 ```
 
+Verify that the configured generator makes a real Gemini API request:
+
+```bash
+python verify_llm.py
+```
+
+The application has no demo or mock fallback. It stops with an error if the API
+key is missing, the configured model looks like a demo/mock model, or Gemini
+does not return a text response.
+
 ## Run Ingestion
 
 The sample folder includes short teaching notes plus the original open-access RAG paper:

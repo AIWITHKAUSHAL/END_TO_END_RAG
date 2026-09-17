@@ -24,6 +24,11 @@ def build_prompt(question: str, retrieved_chunks: list[dict]) -> str:
 
 class GeminiGenerator:
     def __init__(self, api_key: str, model: str):
+        if not api_key.strip():
+            raise ValueError("A Google API key is required for live Gemini requests.")
+        if any(marker in model.lower() for marker in ("demo", "mock", "fake", "test")):
+            raise ValueError(f"Refusing non-production generation model: {model}")
+
         self.client = genai.Client(api_key=api_key)
         self.model = model
 
@@ -32,4 +37,10 @@ class GeminiGenerator:
             model=self.model,
             contents=prompt,
         )
-        return response.text or ""
+        if not response.text:
+            raise RuntimeError("Gemini returned no text response.")
+        return response.text
+
+    def verify_connection(self) -> str:
+        """Make a minimal live API request and return the model's response."""
+        return self.generate("Reply with exactly: LIVE")
