@@ -1,3 +1,5 @@
+"""Discover supported documents and extract plain text from each file."""
+
 from pathlib import Path
 from typing import Iterable
 
@@ -8,6 +10,8 @@ SUPPORTED_EXTENSIONS = {".txt", ".md", ".pdf"}
 
 
 def load_document(path: Path) -> str:
+    """Read one UTF-8 text/Markdown file or extract text from a PDF."""
+
     suffix = path.suffix.lower()
     if suffix in {".txt", ".md"}:
         return path.read_text(encoding="utf-8")
@@ -18,6 +22,8 @@ def load_document(path: Path) -> str:
 
 
 def iter_documents(data_dir: str | Path) -> Iterable[dict]:
+    """Yield source paths and extracted text for supported files under a directory."""
+
     root = Path(data_dir)
     if not root.exists():
         raise FileNotFoundError(f"Document directory does not exist: {root}")

@@ -1,3 +1,5 @@
+"""Compare retrieval results produced by multiple document chunk sizes."""
+
 import argparse
 from pathlib import Path
 
@@ -13,6 +15,8 @@ console = Console()
 
 
 def main() -> None:
+    """Build each requested index and save ranked retrieval results to CSV."""
+
     parser = argparse.ArgumentParser(description="Compare retrieval results for three chunk sizes.")
     parser.add_argument("--question", default="What are the main stages in a RAG pipeline?")
     parser.add_argument("--data-dir", default=settings.data_dir)

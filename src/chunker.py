@@ -1,8 +1,12 @@
+"""Split cleaned documents into overlapping word chunks with provenance."""
+
 from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
 class Chunk:
+    """A searchable text segment and the metadata needed to trace its source."""
+
     id: str
     text: str
     source: str
@@ -12,6 +16,8 @@ class Chunk:
 
 
 def chunk_text(text: str, source: str, chunk_size: int, overlap: int) -> list[Chunk]:
+    """Split text into fixed-size word windows with the requested overlap."""
+
     if chunk_size <= 0:
         raise ValueError("chunk_size must be positive")
     if overlap < 0 or overlap >= chunk_size:
@@ -45,6 +51,8 @@ def chunk_text(text: str, source: str, chunk_size: int, overlap: int) -> list[Ch
 
 
 def chunk_documents(documents: list[dict], chunk_size: int, overlap: int) -> list[Chunk]:
+    """Chunk every document and return one combined, source-aware list."""
+
     all_chunks: list[Chunk] = []
     for document in documents:
         all_chunks.extend(

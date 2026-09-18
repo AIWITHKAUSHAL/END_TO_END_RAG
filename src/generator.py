@@ -1,3 +1,5 @@
+"""Build grounded RAG prompts and generate answers with Gemini."""
+
 from google import genai
 
 
@@ -8,6 +10,8 @@ Cite sources using [source: chunk N] after relevant claims."""
 
 
 def build_prompt(question: str, retrieved_chunks: list[dict]) -> str:
+    """Combine retrieved text and provenance with the user's question."""
+
     context_blocks = []
     for item in retrieved_chunks:
         chunk = item["chunk"]
@@ -23,7 +27,11 @@ def build_prompt(question: str, retrieved_chunks: list[dict]) -> str:
 
 
 class GeminiGenerator:
+    """Validated Gemini client for grounded answer generation."""
+
     def __init__(self, api_key: str, model: str):
+        """Create a live client after rejecting missing keys and mock models."""
+
         if not api_key.strip():
             raise ValueError("A Google API key is required for live Gemini requests.")
         if any(marker in model.lower() for marker in ("demo", "mock", "fake", "test")):
@@ -33,6 +41,8 @@ class GeminiGenerator:
         self.model = model
 
     def generate(self, prompt: str) -> str:
+        """Generate and return a non-empty text response for a prompt."""
+
         response = self.client.models.generate_content(
             model=self.model,
             contents=prompt,
@@ -42,5 +52,5 @@ class GeminiGenerator:
         return response.text
 
     def verify_connection(self) -> str:
-        """Make a minimal live API request and return the model's response."""
+        """Make a minimal live request and return the model's response."""
         return self.generate("Reply with exactly: LIVE")

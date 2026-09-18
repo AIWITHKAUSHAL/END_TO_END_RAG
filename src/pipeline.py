@@ -1,3 +1,5 @@
+"""Orchestrate complete RAG ingestion and question-answering workflows."""
+
 from pathlib import Path
 
 from src.cleaner import clean_text
@@ -10,12 +12,16 @@ from src.vector_store import FaissVectorStore
 
 
 def require_api_key() -> str:
+    """Return the configured Google API key or raise a clear setup error."""
+
     if not settings.google_api_key:
         raise RuntimeError("GOOGLE_API_KEY is missing. Add it to .env or your environment.")
     return settings.google_api_key
 
 
 def ingest(data_dir: str, chunk_size: int, overlap: int) -> dict:
+    """Parse, clean, chunk, embed, and persist all supported documents."""
+
     api_key = require_api_key()
     documents = [
         {
@@ -40,6 +46,8 @@ def ingest(data_dir: str, chunk_size: int, overlap: int) -> dict:
 
 
 def answer(question: str, chunk_size: int, top_k: int) -> dict:
+    """Retrieve relevant chunks and return a Gemini answer with its sources."""
+
     api_key = require_api_key()
     index_base = Path(settings.index_dir) / f"rag_chunks_{chunk_size}"
     store = FaissVectorStore.load(index_base.with_suffix(".faiss"), index_base.with_suffix(".json"))

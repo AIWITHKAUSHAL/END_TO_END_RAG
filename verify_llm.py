@@ -1,3 +1,5 @@
+"""Smoke-test the configured Gemini generation model with a live request."""
+
 from rich.console import Console
 
 from src.config import settings
@@ -9,6 +11,8 @@ console = Console()
 
 
 def main() -> None:
+    """Call Gemini once and print its response when the connection succeeds."""
+
     generator = GeminiGenerator(
         api_key=require_api_key(),
         model=settings.generation_model,

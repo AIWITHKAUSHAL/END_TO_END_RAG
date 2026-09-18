@@ -1,3 +1,5 @@
+"""Command-line entry point for building a FAISS index from documents."""
+
 import argparse
 
 from rich.console import Console
@@ -11,6 +13,8 @@ console = Console()
 
 
 def main() -> None:
+    """Parse CLI options, run ingestion, and display the generated artifacts."""
+
     parser = argparse.ArgumentParser(description="Parse, clean, chunk, embed, and index documents.")
     parser.add_argument("--data-dir", default=settings.data_dir)
     parser.add_argument("--chunk-size", type=int, default=settings.default_chunk_size)

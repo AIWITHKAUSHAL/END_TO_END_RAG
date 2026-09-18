@@ -1,3 +1,5 @@
+"""Load application settings from environment variables and the local .env."""
+
 from dataclasses import dataclass
 import os
 
@@ -9,6 +11,8 @@ load_dotenv()
 
 @dataclass(frozen=True)
 class Settings:
+    """Immutable runtime configuration shared by the UI and CLI workflows."""
+
     google_api_key: str | None = os.getenv("GOOGLE_API_KEY")
     generation_model: str = os.getenv("GENERATION_MODEL", "gemini-3.5-flash-lite")
     embedding_model: str = os.getenv("EMBEDDING_MODEL", "gemini-embedding-001")

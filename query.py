@@ -1,3 +1,5 @@
+"""Command-line entry point for asking a question against a RAG index."""
+
 import argparse
 
 from rich.console import Console
@@ -11,6 +13,8 @@ console = Console()
 
 
 def main() -> None:
+    """Parse a question, run retrieval and generation, and print cited sources."""
+
     parser = argparse.ArgumentParser(description="Ask a question using the local FAISS RAG index.")
     parser.add_argument("question")
     parser.add_argument("--chunk-size", type=int, default=settings.default_chunk_size)

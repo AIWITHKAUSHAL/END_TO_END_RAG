@@ -6,4 +6,4 @@ venv/
 indexes/*.faiss
 indexes/*.json
 data/uploaded_docs/
-.streamlit/
+.streamlit/secrets.toml

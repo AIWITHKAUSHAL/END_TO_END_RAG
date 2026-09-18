@@ -1,0 +1,38 @@
+# Microsoft Fluent-inspired theme for a clean, readable RAG workspace.
+
+[theme]
+base = "light"
+primaryColor = "#0B63CE"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F4F7FB"
+codeBackgroundColor = "#EEF3F8"
+textColor = "#172033"
+linkColor = "#0B63CE"
+borderColor = "#D8E1EC"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "8px"
+buttonRadius = "8px"
+font = "'Inter', sans-serif:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+codeFont = "'JetBrains Mono', monospace:https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+codeFontSize = "0.875rem"
+codeTextColor = "#172033"
+baseFontSize = 15
+baseFontWeight = 400
+headingFontSizes = ["32px", "24px", "20px", "16px", "14px", "12px"]
+headingFontWeights = [700, 650, 600, 600, 600, 600]
+linkUnderline = false
+blueColor = "#0B63CE"
+greenColor = "#16835D"
+redColor = "#C73737"
+orangeColor = "#B86400"
+violetColor = "#7048C6"
+grayColor = "#667085"
+
+[theme.sidebar]
+backgroundColor = "#F4F7FB"
+secondaryBackgroundColor = "#E8EEF6"
+codeBackgroundColor = "#E8EEF6"
+textColor = "#172033"
+borderColor = "#D8E1EC"
+primaryColor = "#0B63CE"
